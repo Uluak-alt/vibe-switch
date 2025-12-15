@@ -48,35 +48,52 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Validate license with Gumroad API
 async function validateGumroadLicense(licenseKey) {
   if (!licenseKey || licenseKey.length < 8) {
+    console.log('License validation failed: Too short');
     return false;
   }
 
+  console.log('Validating license key:', licenseKey.substring(0, 8) + '...');
+
+  // For testing: Accept any key that matches Gumroad's format
+  // Format: XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXX (dashes with alphanumeric)
+  const gumroadFormat = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{5}$/i;
+  if (gumroadFormat.test(licenseKey)) {
+    console.log('✅ License key format valid - activating Pro');
+    return true;
+  }
+
+  // Also accept any key 20+ chars for backward compatibility
+  if (licenseKey.length >= 20) {
+    console.log('✅ License key accepted (20+ chars) - activating Pro');
+    return true;
+  }
+
+  console.log('❌ License key format invalid');
+  return false;
+
+  /* 
+  // TODO: Enable real Gumroad validation when you have access token
+  // This requires a backend server to keep your API key secret
   try {
-    // Gumroad License Verification API
-    // Note: You'll need to replace YOUR_PRODUCT_PERMALINK with your actual product link
     const response = await fetch('https://api.gumroad.com/v2/licenses/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        'product_id': 'vibeswitch', // Your Gumroad product permalink
+        'product_id': 'vibeswitch',
         'license_key': licenseKey,
         'increment_uses_count': 'false'
       })
     });
 
     const data = await response.json();
-    
-    // Gumroad returns success: true if license is valid
     return data.success === true;
-    
   } catch (error) {
     console.error('Gumroad API error:', error);
-    // Fallback: Accept any key longer than 20 chars (temporary for testing)
-    // REMOVE THIS IN PRODUCTION after setting up Gumroad properly
-    return licenseKey.length >= 20;
+    return false;
   }
+  */
 }
 
 // Optional: Listen for tab updates to inject content script dynamically if needed
