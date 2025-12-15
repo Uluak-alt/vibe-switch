@@ -902,18 +902,22 @@
 
       if (!systemInstruction) return;
 
-      const injection = `(System Instruction: ${systemInstruction})\n\n`;
+      // Get user's message
+      const userMessage = target.value !== undefined ? target.value : target.innerText;
+      
+      // Skip if already injected
+      if (userMessage.includes('[VIBE:') || userMessage.startsWith('Act as ')) return;
+
+      // Inject prompt naturally as an instruction
+      const injection = `${systemInstruction}\n\nUser request: ${userMessage}`;
 
       if (target.value !== undefined) {
-        if (!target.value.startsWith('(System Instruction:')) {
-          target.value = injection + target.value;
-          target.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+        target.value = injection;
+        target.dispatchEvent(new Event('input', { bubbles: true }));
       } else {
-        if (!target.innerText.startsWith('(System Instruction:')) {
-          target.innerText = injection + target.innerText;
-          target.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+        target.innerText = injection;
+        target.dispatchEvent(new Event('input', { bubbles: true }));
+      }
       }
     }
   }, true);
