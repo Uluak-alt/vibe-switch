@@ -1,20 +1,100 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🎭 Vibe Switch - Chrome Extension
 
-# Run and deploy your AI Studio app
+**Transform your AI prompts with expert personalities**
 
-This contains everything you need to run your app locally.
+Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT, Claude, and Gemini. Get professional writing, creative storytelling, technical expertise, and more - all with a single click.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1e6xkT1PL-ik7arojSjSha50XgnqkuRMl
+🌐 **Website:** https://uluak-alt.github.io/vibe-switch/
 
-## Run Locally
+## ✨ Features
 
-**Prerequisites:**  Node.js
+- 🎯 **30+ Expert Vibes** - Grammar Pro, Code Expert, Copywriter, Screenwriter, and more
+- 🎨 **Custom Vibe Creator** - Design your own expert personalities
+- 🎚️ **5-Dimension Tuner** - Fine-tune depth, tone, creativity, format, and expertise level
+- 🆓 **Free Tier** - 3 essential vibes (Grammar Pro, Code Expert, TL;DR)
+- 💎 **Pro Mode** - Unlock all 30+ vibes + custom creation for $4.99
 
+## 🚀 Installation
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### From Chrome Web Store
+*Coming soon - currently in review*
+
+### Manual Installation (Developer Mode)
+1. Download or clone this repository
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode" (top right)
+4. Click "Load unpacked"
+5. Select the `extension/` folder
+6. Pin the extension to your toolbar
+
+## 📖 How It Works
+
+1. Visit ChatGPT, Claude, or Gemini
+2. Click a vibe from the sidebar (collapses/expands with toggle)
+3. Your prompt gets transformed with expert personality
+4. Hit Enter to send the enhanced prompt
+
+## 🔓 Unlock Pro
+
+Get access to all 30+ vibes and custom vibe creation:
+1. Click "Unlock Pro" in the sidebar
+2. Purchase a license ($4.99) via Gumroad
+3. Paste your license key in the extension popup
+4. Enjoy unlimited expert personalities!
+
+## 🛠️ Development
+
+This repository contains both the extension and a demo app:
+
+### Extension (Production)
+```bash
+cd extension/
+# Load in Chrome via chrome://extensions/
+```
+
+### Demo App (Development)
+```bash
+npm install
+npm run dev
+```
+
+## 📁 Project Structure
+
+```
+extension/          # Chrome Extension (production code)
+├── manifest.json   # Extension configuration
+├── background.js   # Service worker for license validation
+├── content.js      # Main extension logic (30+ vibes)
+├── popup.html/js   # License management UI
+├── icons/          # Extension icons
+└── PRIVACY.md      # Privacy policy
+
+docs/               # GitHub Pages landing page
+App.tsx             # Demo app (not part of extension)
+```
+
+## 🔒 Privacy & Security
+
+- **Zero tracking** - No analytics or user data collection
+- **Local storage only** - All preferences stored on your device
+- **No API keys** - Pure prompt injection, no external calls
+- **Open source** - Full transparency
+
+Read our full [Privacy Policy](https://uluak-alt.github.io/vibe-switch/extension/PRIVACY.md)
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) file
+
+## 🤝 Contributing
+
+Issues and pull requests welcome! Please read our submission guidelines first.
+
+## 📧 Support
+
+- GitHub Issues: [Report a bug](https://github.com/Uluak-alt/vibe-switch/issues)
+- Email: support@vibeswitch.app
+
+---
+
+**Made with ❤️ for AI power users**
