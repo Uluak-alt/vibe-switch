@@ -468,14 +468,17 @@
     
     /* Modal */
     .modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(2px);
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 50;
+      z-index: 999999;
     }
     .modal-box {
       background: #1e293b;
@@ -815,6 +818,13 @@
   }
 
   function openUnlockModal() {
+    // Auto-expand sidebar if collapsed
+    if (state.isCollapsed) {
+      state.isCollapsed = false;
+      chrome.storage.local.set({ isCollapsed: false });
+      renderSidebar();
+    }
+
     const overlay = document.createElement('div');
     overlay.className = 'modal-overlay';
     overlay.innerHTML = `
