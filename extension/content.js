@@ -887,13 +887,24 @@
   // Listen for Enter key to inject system prompt
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      if (state.activeId === 'default') return;
+      console.log('🔑 Enter pressed, activeId:', state.activeId);
+      
+      if (state.activeId === 'default') {
+        console.log('⏭️ Skipping: default vibe active');
+        return;
+      }
 
       const target = e.target;
       const isInput = target.tagName === 'TEXTAREA' || 
                      target.getAttribute('contenteditable') === 'true' ||
                      target.tagName === 'INPUT';
-      if (!isInput) return;
+      
+      console.log('📝 Target:', target.tagName, 'isInput:', isInput);
+      
+      if (!isInput) {
+        console.log('⏭️ Skipping: not an input field');
+        return;
+      }
 
       let systemInstruction = "";
       console.log('🎯 Active vibe:', state.activeId);
@@ -929,12 +940,18 @@
       
       lastInjectedPrompt = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n`;
 
+      console.log('💉 Injecting prompt for:', vibeName);
+      console.log('📄 Original message length:', userMessage.length);
+      console.log('📄 Injected message length:', injection.length);
+
       if (target.value !== undefined) {
         target.value = injection;
         target.dispatchEvent(new Event('input', { bubbles: true }));
+        console.log('✅ Injection complete (value)');
       } else {
         target.innerText = injection;
         target.dispatchEvent(new Event('input', { bubbles: true }));
+        console.log('✅ Injection complete (innerText)');
       }
     }
   }, true);
