@@ -881,6 +881,9 @@
     container.querySelector('.sidecar-container').appendChild(overlay);
   }
 
+  // Store the current prompt injection marker
+  let lastInjectedPrompt = null;
+
   // Listen for Enter key to inject system prompt
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -903,13 +906,17 @@
       if (!systemInstruction) return;
 
       // Get user's message
-      const userMessage = target.value !== undefined ? target.value : target.innerText;
+      let userMessage = target.value !== undefined ? target.value : target.innerText;
       
-      // Skip if already injected
-      if (userMessage.includes('[VIBE:') || userMessage.startsWith('Act as ')) return;
+      // Remove any previous injection from this session
+      if (lastInjectedPrompt && userMessage.startsWith(lastInjectedPrompt)) {
+        userMessage = userMessage.substring(lastInjectedPrompt.length).trim();
+      }
 
-      // Inject prompt naturally as an instruction
-      const injection = `${systemInstruction}\n\nUser request: ${userMessage}`;
+      // Create invisible prompt wrapper using markdown that instructs behavior
+      const injection = `[Adopt this persona and respond accordingly: ${systemInstruction}]\n\n${userMessage}`;
+      
+      lastInjectedPrompt = `[Adopt this persona and respond accordingly: ${systemInstruction}]\n\n`;
 
       if (target.value !== undefined) {
         target.value = injection;
@@ -918,6 +925,21 @@
         target.innerText = injection;
         target.dispatchEvent(new Event('input', { bubbles: true }));
       }
+    }
+  }, true);
+
+  // Clear injection when input is cleared/changed
+  document.addEventListener('input', (e) => {
+    const target = e.target;
+    const isInput = target.tagName === 'TEXTAREA' || 
+                   target.getAttribute('contenteditable') === 'true';
+    if (!isInput) return;
+
+    const currentText = target.value !== undefined ? target.value : target.innerText;
+    
+    // If user cleared the input, reset injection tracker
+    if (!currentText || currentText.length < 10) {
+      lastInjectedPrompt = null;
     }
   }, true);
 
