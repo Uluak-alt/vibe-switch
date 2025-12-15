@@ -913,10 +913,12 @@
         userMessage = userMessage.substring(lastInjectedPrompt.length).trim();
       }
 
-      // Create invisible prompt wrapper using markdown that instructs behavior
-      const injection = `[Adopt this persona and respond accordingly: ${systemInstruction}]\n\n${userMessage}`;
+      // Format: Natural instruction that ChatGPT understands without echoing
+      // Using implicit instruction style
+      const vibeName = state.activeId;
+      const injection = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n${userMessage}`;
       
-      lastInjectedPrompt = `[Adopt this persona and respond accordingly: ${systemInstruction}]\n\n`;
+      lastInjectedPrompt = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n`;
 
       if (target.value !== undefined) {
         target.value = injection;
