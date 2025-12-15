@@ -1,0 +1,5 @@
+{
+  "name": "Vibe Switch - Extension Builder & Demo",
+  "description": "A simulation and generator for the Vibe Switch Chrome Extension. Test prompt rewriting with personalities using Gemini Flash, and export the extension source code.",
+  "requestFramePermissions": []
+}

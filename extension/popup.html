@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Switch</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 320px;
+      min-height: 400px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo svg {
+      width: 36px;
+      height: 36px;
+      stroke: white;
+    }
+    h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    .status {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .status-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    .status-value {
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-free {
+      background: rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+    }
+    .badge-pro {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+    .input-group {
+      margin-bottom: 12px;
+    }
+    .input {
+      width: 100%;
+      padding: 10px 12px;
+      background: #020617;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f8fafc;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input:focus {
+      border-color: #3b82f6;
+    }
+    .input::placeholder {
+      color: #64748b;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    .btn-primary:disabled {
+      background: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+    .btn-gumroad {
+      background: #ff90e8;
+      color: #000;
+      margin-bottom: 12px;
+    }
+    .btn-gumroad:hover {
+      background: #ff7fd9;
+    }
+    .divider {
+      text-align: center;
+      margin: 16px 0;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .link {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 12px;
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+    .success-msg {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .error-msg {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .info {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .info strong {
+      color: #f8fafc;
+    }
+    #pro-content, #free-content {
+      display: none;
+    }
+    .footer {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #334155;
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+    </div>
+    <h1>Vibe Switch</h1>
+    <p class="subtitle">Pro Tools for AI Chat</p>
+  </div>
+
+  <div class="status">
+    <div class="status-label">Account Status</div>
+    <div class="status-value">
+      <span id="status-text">Free</span>
+      <span class="badge badge-free" id="status-badge">FREE</span>
+    </div>
+  </div>
+
+  <div id="success-message" style="display:none;" class="success-msg">
+    ✅ Pro activated! Reload the page to use all features.
+  </div>
+
+  <div id="error-message" style="display:none;" class="error-msg"></div>
+
+  <!-- Free User Content -->
+  <div id="free-content">
+    <div class="section">
+      <div class="section-title">Unlock Pro Features</div>
+      <button class="btn btn-gumroad" id="buy-btn">
+        Buy License - $4.99
+      </button>
+      <div class="divider">— OR ENTER LICENSE KEY —</div>
+      <div class="input-group">
+        <input type="text" class="input" id="license-input" placeholder="Paste your license key">
+      </div>
+      <button class="btn btn-primary" id="activate-btn">
+        Activate License
+      </button>
+    </div>
+
+    <div class="info">
+      <strong>✨ Pro Features:</strong><br>
+      • 20+ expert vibe presets<br>
+      • Create unlimited custom vibes<br>
+      • Advanced vibe tuner<br>
+      • Priority support
+    </div>
+  </div>
+
+  <!-- Pro User Content -->
+  <div id="pro-content">
+    <div class="section">
+      <div class="section-title">Your License</div>
+      <div class="info">
+        ✅ <strong>Pro Active</strong><br>
+        License: <span id="license-key-display"></span>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="btn btn-primary" id="deactivate-btn">
+        Deactivate License
+      </button>
+    </div>
+
+    <div class="info">
+      Thank you for supporting Vibe Switch! 🎉<br>
+      Visit supported sites to use all features.
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://vibeswitch.app" class="link" target="_blank">Help & Support</a>
+    Made with ❤️ by Vibe Switch Team
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+🎨 ICON CONVERSION REQUIRED
+============================
+
+The SVG icons have been created, but Chrome Web Store requires PNG format.
+
+📋 QUICK CONVERSION OPTIONS:
+
+Option 1: Online Converter (Recommended - 2 minutes)
+-----------------------------------------------------
+1. Visit: https://cloudconvert.com/svg-to-png
+2. Upload: extension/icons/icon16.svg
+3. Settings: Keep size at 16x16
+4. Download as: icon16.png
+5. Repeat for icon48.svg and icon128.svg
+
+Option 2: Figma (Free - 5 minutes)
+-----------------------------------
+1. Create free account at figma.com
+2. Import each SVG file
+3. Export as PNG at exact dimensions
+4. Download to extension/icons/
+
+Option 3: macOS Preview App (Mac only - 1 minute)
+--------------------------------------------------
+1. Open each SVG in Preview app
+2. File → Export
+3. Format: PNG
+4. Save with same name
+
+Option 4: Photopea (Free online - 3 minutes)
+---------------------------------------------
+1. Visit: https://www.photopea.com
+2. File → Open each SVG
+3. File → Export As → PNG
+4. Save with matching names
+
+Option 5: ImageMagick (Command line)
+-------------------------------------
+If you have brew installed:
+  brew install imagemagick
+  cd extension/icons
+  magick icon16.svg icon16.png
+  magick icon48.svg icon48.png
+  magick icon128.svg icon128.png
+
+📁 Required Files:
+- extension/icons/icon16.png  (16x16 pixels)
+- extension/icons/icon48.png  (48x48 pixels)
+- extension/icons/icon128.png (128x128 pixels)
+
+✅ After conversion, run: ./package-extension.sh
