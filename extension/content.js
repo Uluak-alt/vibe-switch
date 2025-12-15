@@ -896,14 +896,23 @@
       if (!isInput) return;
 
       let systemInstruction = "";
+      console.log('🎯 Active vibe:', state.activeId);
+      
       if (PROMPTS[state.activeId]) {
         systemInstruction = PROMPTS[state.activeId];
+        console.log('✅ Found prompt:', systemInstruction.substring(0, 50) + '...');
       } else {
         const custom = state.customVibes.find(v => v.id === state.activeId);
-        if (custom) systemInstruction = custom.prompt;
+        if (custom) {
+          systemInstruction = custom.prompt;
+          console.log('✅ Found custom prompt');
+        }
       }
 
-      if (!systemInstruction) return;
+      if (!systemInstruction) {
+        console.log('❌ No system instruction found for:', state.activeId);
+        return;
+      }
 
       // Get user's message
       let userMessage = target.value !== undefined ? target.value : target.innerText;
