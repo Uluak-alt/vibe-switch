@@ -60,7 +60,7 @@ async function validateGumroadLicense(licenseKey) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        'product_id': 'YOUR_PRODUCT_PERMALINK', // Replace with your Gumroad product permalink
+        'product_id': 'vibeswitch', // Your Gumroad product permalink
         'license_key': licenseKey,
         'increment_uses_count': 'false'
       })

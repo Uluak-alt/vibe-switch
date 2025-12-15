@@ -831,7 +831,7 @@
 
     overlay.querySelector('#buy-btn').onclick = () => {
       // Open Gumroad product page
-      window.open('https://vibeswitch.gumroad.com/l/vibeswitch', '_blank');
+      window.open('https://fethiulak.gumroad.com/l/vibeswitch', '_blank');
     };
 
     overlay.querySelector('#verify-btn').onclick = () => {
