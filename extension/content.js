@@ -662,10 +662,17 @@
         return;
       }
 
+      console.log('🎭 Vibe clicked:', vibe.id, vibe.name);
       state.activeId = vibe.id;
-      chrome.storage.sync.set({ activePersonality: vibe.id });
+      console.log('✅ State updated, activeId now:', state.activeId);
+      
+      chrome.storage.sync.set({ activePersonality: vibe.id }, () => {
+        console.log('💾 Saved to storage:', vibe.id);
+      });
+      
       renderSidebar();
       setTimeout(() => {
+        console.log('⏱️ Timeout fired, activeId still:', state.activeId);
         state.isCollapsed = true;
         state.view = 'list';
         chrome.storage.local.set({ isCollapsed: true });
