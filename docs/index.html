@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Transform your AI chat prompts with personality. 30+ expert vibes for ChatGPT, Claude & Gemini.">
+  <title>Vibe Switch - Pro Tools for AI Chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #f8fafc;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
+    }
+    .logo svg {
+      width: 64px;
+      height: 64px;
+      stroke: white;
+      stroke-width: 2;
+    }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .tagline {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      margin-bottom: 40px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-gumroad {
+      background: #ff90e8;
+      color: #000;
+      box-shadow: 0 10px 30px rgba(255, 144, 232, 0.4);
+    }
+    .status {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(250, 204, 21, 0.2);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      border-radius: 20px;
+      color: #facc15;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #3b82f6;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .feature {
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .feature h3 {
+      color: #60a5fa;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .feature p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .price-card {
+      padding: 30px;
+      background: rgba(15, 23, 42, 0.7);
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+    .price-card.pro {
+      border-color: #3b82f6;
+      box-shadow: 0 0 50px rgba(59, 130, 246, 0.2);
+    }
+    .price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #3b82f6;
+      margin: 20px 0;
+    }
+    .price-card ul {
+      text-align: left;
+      list-style: none;
+      margin: 20px 0;
+    }
+    .price-card li {
+      padding: 8px 0;
+      color: #cbd5e1;
+    }
+    .price-card li:before {
+      content: "✓ ";
+      color: #22c55e;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #64748b;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 60px;
+    }
+    .links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .links a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .tagline {
+        font-size: 1.2rem;
+      }
+      .cta-buttons {
+        flex-direction: column;
+      }
+      section {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </div>
+      <h1>Vibe Switch</h1>
+      <p class="tagline">Pro Tools for ChatGPT, Claude & Gemini</p>
+      <p class="status">🚀 Coming Soon to Chrome Web Store</p>
+      <div class="cta-buttons">
+        <a href="https://github.com/yourusername/vibe-switch" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          View on GitHub
+        </a>
+        <a href="https://vibeswitch.gumroad.com/l/vibeswitch" class="btn btn-gumroad">
+          Get Pro - $4.99
+        </a>
+      </div>
+    </header>
+
+    <section>
+      <h2>🎯 What is Vibe Switch?</h2>
+      <p>Transform your AI conversations with expert personality modes. Instead of generic responses, get answers from a Senior Copy Editor, Staff Engineer, Socratic Tutor, or 27+ other expert personalities.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h3>📝 30+ Expert Vibes</h3>
+          <p>Writing, Learning, Career, Technical, Creative, and Lifestyle personalities</p>
+        </div>
+        <div class="feature">
+          <h3>🎨 Custom Creation</h3>
+          <p>Build unlimited custom vibes with your own system prompts</p>
+        </div>
+        <div class="feature">
+          <h3>🔐 Privacy First</h3>
+          <p>Zero tracking, all local storage, no external servers</p>
+        </div>
+        <div class="feature">
+          <h3>⚡ Works Everywhere</h3>
+          <p>ChatGPT, Claude, and Gemini support</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>💰 Pricing</h2>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>3 expert vibes</li>
+            <li>Works on all platforms</li>
+            <li>Beautiful sidebar</li>
+            <li>Keyboard shortcuts</li>
+          </ul>
+          <a href="https://chrome.google.com/webstore" class="btn btn-secondary">Install Free</a>
+        </div>
+        <div class="price-card pro">
+          <h3>Pro</h3>
+          <div class="price">$4.99</div>
+          <p style="color: #94a3b8; margin-bottom: 20px;">One-time payment, lifetime access</p>
+          <ul>
+            <li>30+ expert vibes</li>
+            <li>Unlimited custom vibes</li>
+            <li>Advanced vibe tuner</li>
+            <li>Priority support</li>
+            <li>All future updates</li>
+          </ul>
+          <a href="https://vibeswitch.gumroad.com/l/vibeswitch" class="btn btn-gumroad">Buy Pro License</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>📋 How It Works</h2>
+      <ol style="color: #cbd5e1; padding-left: 20px;">
+        <li style="margin-bottom: 15px;"><strong style="color: #60a5fa;">Install</strong> - Add the extension to Chrome</li>
+        <li style="margin-bottom: 15px;"><strong style="color: #60a5fa;">Visit</strong> - Go to ChatGPT, Claude, or Gemini</li>
+        <li style="margin-bottom: 15px;"><strong style="color: #60a5fa;">Select</strong> - Choose a vibe from the sidebar</li>
+        <li style="margin-bottom: 15px;"><strong style="color: #60a5fa;">Chat</strong> - Type normally, get expert responses</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>🔐 Privacy Policy</h2>
+      <p>We take your privacy seriously. Vibe Switch:</p>
+      <ul style="color: #cbd5e1; padding-left: 20px; margin-top: 15px;">
+        <li style="margin-bottom: 10px;">✅ Collects <strong>zero data</strong></li>
+        <li style="margin-bottom: 10px;">✅ Stores everything <strong>locally</strong> on your device</li>
+        <li style="margin-bottom: 10px;">✅ Has <strong>no tracking or analytics</strong></li>
+        <li style="margin-bottom: 10px;">✅ Only communicates with Gumroad for license validation</li>
+        <li style="margin-bottom: 10px;">✅ Is <strong>GDPR compliant</strong></li>
+      </ul>
+      <p style="margin-top: 20px;">
+        <a href="https://github.com/yourusername/vibe-switch/blob/main/extension/PRIVACY.md" style="color: #60a5fa;">Read Full Privacy Policy →</a>
+      </p>
+    </section>
+
+    <footer>
+      <div class="links">
+        <a href="https://github.com/yourusername/vibe-switch">GitHub</a>
+        <a href="https://github.com/yourusername/vibe-switch/blob/main/extension/PRIVACY.md">Privacy</a>
+        <a href="https://github.com/yourusername/vibe-switch/issues">Support</a>
+        <a href="mailto:support@vibeswitch.app">Contact</a>
+      </div>
+      <p>Made with ❤️ for better AI conversations</p>
+      <p style="margin-top: 10px;">© 2025 Vibe Switch Team. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
