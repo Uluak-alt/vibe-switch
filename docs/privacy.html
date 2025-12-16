@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Vibe Switch</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6; 
+            color: #333; 
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #6366f1; margin-bottom: 10px; font-size: 2.5em; }
+        h2 { color: #4f46e5; margin-top: 30px; margin-bottom: 15px; font-size: 1.8em; }
+        h3 { color: #6366f1; margin-top: 20px; margin-bottom: 10px; font-size: 1.3em; }
+        p { margin-bottom: 15px; }
+        ul, ol { margin-left: 30px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        strong { color: #4f46e5; }
+        .warning { 
+            background: #fef3c7; 
+            border-left: 4px solid #f59e0b; 
+            padding: 15px; 
+            margin: 20px 0; 
+            border-radius: 4px;
+        }
+        .summary { 
+            background: #e0e7ff; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-top: 30px;
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 2px solid #e5e7eb; 
+            color: #6b7280;
+        }
+        code { 
+            background: #f3f4f6; 
+            padding: 2px 6px; 
+            border-radius: 3px; 
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy for Vibe Switch</h1>
+        <p><strong>Last Updated: December 16, 2025</strong></p>
+        
+        <h2>Overview</h2>
+        <p>Vibe Switch (hereinafter "the extension") is committed to protecting your privacy. This Privacy Policy explains how the extension manages the minimal data required for its operation.</p>
+        
+        <h2>Data Collection</h2>
+        
+        <h3>What We Collect</h3>
+        <p>Vibe Switch collects and stores the following data <strong>ONLY locally on your device</strong>:</p>
+        <ol>
+            <li><strong>User Preferences</strong>
+                <ul>
+                    <li>Selected personality/vibe</li>
+                    <li>Custom vibe configurations you create</li>
+                    <li>UI preferences (collapsed/expanded state)</li>
+                </ul>
+            </li>
+            <li><strong>License Information</strong>
+                <ul>
+                    <li>Pro license key (if purchased)</li>
+                    <li>License activation status</li>
+                    <li>Device binding identifier</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>What We DON'T Collect</h3>
+        <ul>
+            <li>❌ Your chat conversations or prompts</li>
+            <li>❌ Personal information</li>
+            <li>❌ Browsing history</li>
+            <li>❌ Any data sent to external servers</li>
+            <li>❌ Analytics or usage statistics</li>
+            <li>❌ Cookies or tracking data</li>
+        </ul>
+        
+        <h2>Data Storage</h2>
+        <p>All data is stored locally using Chrome's built-in storage API (<code>chrome.storage</code>), though certain subsets of this data are transmitted only under specific conditions, namely:</p>
+        <ul>
+            <li><strong>chrome.storage.sync</strong>: User preferences and custom vibes (synchronized across your Chrome browsers via Google's Chrome Sync service)</li>
+            <li><strong>chrome.storage.local</strong>: License information and UI state (device-specific)</li>
+        </ul>
+        
+        <div class="warning">
+            <p><strong>Third-Party Sync Disclaimer:</strong> Vibe Switch does not control, and is not responsible for, the security and privacy practices of Google's Chrome Sync service. By enabling Chrome Sync, you acknowledge and accept Google's policies and procedures regarding the transfer and storage of your synced data.</p>
+        </div>
+        
+        <p><strong>Data Transmission Exceptions:</strong></p>
+        <ol>
+            <li>Sync data is transmitted through Google's Chrome Sync (only if you have Chrome Sync enabled in your browser)</li>
+            <li>License validation communicates with Gumroad's API (only when you activate a Pro license)</li>
+        </ol>
+        
+        <h2>Third-Party Services</h2>
+        
+        <h3>Gumroad License Validation</h3>
+        <p>When you purchase and activate a Pro license, the extension communicates with Gumroad's API to validate your license key:</p>
+        <ul>
+            <li><strong>Purpose</strong>: Verify license authenticity and prevent unauthorized reuse</li>
+            <li><strong>Data Sent</strong>: License key and product ID only</li>
+            <li><strong>Frequency</strong>: Only during activation (one-time per device)</li>
+            <li><strong>Gumroad Privacy</strong>: See <a href="https://gumroad.com/privacy" target="_blank">Gumroad's Privacy Policy</a></li>
+        </ul>
+        
+        <p>The extension does NOT:</p>
+        <ul>
+            <li>Store your payment information</li>
+            <li>Access your Gumroad account details</li>
+            <li>Send any personal information to Gumroad beyond the license key</li>
+        </ul>
+        
+        <h3>Website Interactions</h3>
+        <p>The extension operates on these websites:</p>
+        <ul>
+            <li>chatgpt.com</li>
+            <li>gemini.google.com</li>
+        </ul>
+        
+        <p><strong>Functionality:</strong></p>
+        <ul>
+            <li>The extension injects a sidebar interface for vibe selection</li>
+            <li>The extension intercepts and reads text from the chat input field momentarily, solely for the purpose of locally prepending or appending the selected personality instructions to the prompt before it is submitted to the third-party chat service</li>
+            <li>This content is neither stored nor transmitted by Vibe Switch</li>
+            <li>The modified prompt (user text + personality instructions) is then sent directly to the third-party service (ChatGPT or Gemini) by your browser, following that service's own privacy practices</li>
+        </ul>
+        
+        <h2>Permissions Explained</h2>
+        
+        <h3>Required Permissions</h3>
+        <ol>
+            <li><strong>storage</strong>
+                <ul>
+                    <li>Purpose: Save your preferences and custom vibes locally</li>
+                    <li>Scope: Only accessible by this extension</li>
+                </ul>
+            </li>
+            <li><strong>activeTab</strong>
+                <ul>
+                    <li>Purpose: Inject sidebar on supported chat websites</li>
+                    <li>Scope: The activeTab permission is a temporary, minimal permission that only grants the extension access to the current tab when you actively interact with the extension icon, and access is automatically revoked when you leave the tab</li>
+                </ul>
+            </li>
+            <li><strong>scripting</strong>
+                <ul>
+                    <li>Purpose: Add the Vibe Switch interface to web pages</li>
+                    <li>Scope: Limited to declared host sites</li>
+                </ul>
+            </li>
+        </ol>
+        
+        <h3>Host Permissions</h3>
+        <p>The extension requests access to:</p>
+        <ul>
+            <li><code>*://chatgpt.com/*</code></li>
+            <li><code>*://gemini.google.com/*</code></li>
+        </ul>
+        <p><strong>Purpose:</strong> Inject the Vibe Switch sidebar and modify your prompts with personality instructions.</p>
+        <p><strong>The extension Cannot:</strong> Access any other websites or data outside these domains.</p>
+        
+        <h2>Data Security</h2>
+        <ul>
+            <li>All data is stored using Chrome's secure storage APIs</li>
+            <li>License keys are validated through HTTPS</li>
+            <li>No passwords or payment information is handled by the extension</li>
+            <li>Open source code available for audit at <a href="https://github.com/Uluak-alt/vibe-switch" target="_blank">https://github.com/Uluak-alt/vibe-switch</a></li>
+        </ul>
+        
+        <h2>Limitation of Liability</h2>
+        <div class="warning">
+            <p><strong>IMPORTANT LEGAL DISCLAIMER:</strong></p>
+            <p>In no event shall Vibe Switch, its developers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+            <ol>
+                <li>the use or inability to use the extension;</li>
+                <li>any conduct or content of any third party on the extension (including Gumroad or Google's Chrome Sync);</li>
+                <li>any unauthorized access, use, or alteration of your data stored locally on your device;</li>
+                <li>any errors, bugs, or technical failures in the extension's operation;</li>
+                <li>any security vulnerabilities in your local device or browser.</li>
+            </ol>
+            <p><strong>User Responsibility:</strong> You acknowledge that the security of data stored locally on your device is dependent on your device's security measures, browser configuration, and Chrome Sync settings. Vibe Switch cannot guarantee the security of data stored on devices we do not control.</p>
+        </div>
+        
+        <h2>Children's Privacy</h2>
+        <p>Vibe Switch is not directed at children under 13. The extension does not knowingly collect information from children.</p>
+        
+        <h2>Changes to Privacy Policy</h2>
+        <p>The extension developers may update this policy occasionally. Changes will be posted:</p>
+        <ul>
+            <li>In this document with a new "Last Updated" date</li>
+            <li>On the GitHub Pages website: <a href="https://uluak-alt.github.io/vibe-switch/privacy.html">https://uluak-alt.github.io/vibe-switch/privacy.html</a></li>
+            <li>In the Chrome Web Store listing</li>
+        </ul>
+        
+        <h2>Your Data Rights</h2>
+        <p>Given the local-only storage model, your data control is primarily exercised by managing the Chrome extension itself:</p>
+        <ul>
+            <li><strong>Access:</strong> You may inspect your stored data directly via the Chrome Developer Tools interface: <code>chrome://extensions</code> → Vibe Switch → "Inspect views: service worker" → Application tab → Storage</li>
+            <li><strong>Deletion:</strong> You may delete all data by completely removing the Vibe Switch extension from Chrome via <code>chrome://extensions</code></li>
+            <li><strong>Portability:</strong> Your custom vibes and preferences can be exported manually through the browser's developer tools if needed</li>
+        </ul>
+        
+        <h2>Contact Us</h2>
+        <p>Questions about privacy?</p>
+        <ul>
+            <li>GitHub Issues: <a href="https://github.com/Uluak-alt/vibe-switch/issues">https://github.com/Uluak-alt/vibe-switch/issues</a></li>
+            <li>Website: <a href="https://uluak-alt.github.io/vibe-switch/">https://uluak-alt.github.io/vibe-switch/</a></li>
+        </ul>
+        
+        <h2>Regulatory Compliance</h2>
+        <p><strong>Data Protection Regulations:</strong> As Vibe Switch does not collect, store, or transmit Personal Data (as defined under GDPR and CCPA), the core requirements of these regulations are satisfied. Should our data handling practices change to involve Personal Data, this policy will be immediately updated to reflect specific compliance mechanisms.</p>
+        <p><strong>Chrome Web Store Policies:</strong> This extension complies with Chrome Web Store Developer Program Policies and Google's Limited Use Requirements.</p>
+        <p><strong>Ongoing Commitment:</strong> The extension's implementation rigorously adheres to the privacy representations made in this policy.</p>
+        
+        <div class="summary">
+            <h2>Summary</h2>
+            <p><strong>In Plain English:</strong></p>
+            <p>Vibe Switch is a privacy-first extension. The extension:</p>
+            <ul>
+                <li>Stores your settings locally on your device</li>
+                <li>Never collects your chat conversations</li>
+                <li>Never tracks you</li>
+                <li>Only communicates with Gumroad to verify license keys (one-time)</li>
+                <li>Is completely transparent with open source code available for audit</li>
+            </ul>
+            <p>Your data stays on your device, subject to the sync and third-party service limitations described above.</p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Effective Date:</strong> December 16, 2025</p>
+            <p><strong>Version:</strong> 1.1</p>
+            <p>This Privacy Policy sets a high bar for privacy protection. The extension's implementation rigorously adheres to these representations.</p>
+            <p style="margin-top: 20px;"><a href="index.html">← Back to Vibe Switch</a></p>
+        </div>
+    </div>
+</body>
+</html>
