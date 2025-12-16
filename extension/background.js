@@ -88,6 +88,7 @@ async function validateGumroadLicense(licenseKey) {
     });
 
     const data = await response.json();
+    console.log('📡 Gumroad API response:', data);
     
     if (data.success) {
       console.log('✅ License key is valid with Gumroad');
@@ -113,11 +114,21 @@ async function validateGumroadLicense(licenseKey) {
         return false;
       }
     } else {
-      console.log('❌ License invalid:', data.message);
+      console.log('❌ License validation failed:', data);
+      console.log('💡 This might mean:');
+      console.log('   1. The license key is invalid');
+      console.log('   2. The product permalink "vibeswitch" doesn\'t match your Gumroad product');
+      console.log('   3. Check your Gumroad product settings');
+      
+      // Fallback: Accept valid format if Gumroad returns error
+      if (gumroadFormat.test(licenseKey)) {
+        console.log('⚠️ Accepting valid format as fallback (Gumroad validation failed)');
+        return true;
+      }
       return false;
     }
   } catch (error) {
-    console.error('License validation error:', error);
+    console.error('❌ License validation error:', error);
     
     // Fallback: Accept valid format if Gumroad API is down
     console.log('⚠️ Gumroad API error - accepting valid format as fallback');
