@@ -61,7 +61,7 @@ After setup, you'll have:
 ```
 Repository:  https://github.com/YOUR_USERNAME/vibe-switch
 Website:     https://YOUR_USERNAME.github.io/vibe-switch/
-Privacy:     https://YOUR_USERNAME.github.io/vibe-switch/extension/PRIVACY.md
+Privacy:     https://uluak-alt.github.io/vibe-switch/privacy.html
 ```
 
 ## 🔧 Update Extension Files
@@ -97,7 +97,7 @@ git push
 
 1. **Chrome Web Store Submission**:
    - Homepage URL: `https://YOUR_USERNAME.github.io/vibe-switch/`
-   - Privacy Policy: `https://YOUR_USERNAME.github.io/vibe-switch/extension/PRIVACY.md`
+   - Privacy Policy: `https://uluak-alt.github.io/vibe-switch/privacy.html`
 
 2. **Gumroad Product Page**:
    - Website: `https://YOUR_USERNAME.github.io/vibe-switch/`
@@ -135,7 +135,7 @@ git push -u origin main
 ### 404 on Privacy Policy
 The full URL should be:
 ```
-https://YOUR_USERNAME.github.io/vibe-switch/extension/PRIVACY.md
+https://uluak-alt.github.io/vibe-switch/privacy.html
 ```
 
 GitHub automatically renders `.md` files as HTML.

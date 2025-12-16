@@ -80,7 +80,7 @@ App.tsx             # Demo app (not part of extension)
 - **No API keys** - Pure prompt injection, no external calls
 - **Open source** - Full transparency
 
-Read our full [Privacy Policy](https://uluak-alt.github.io/vibe-switch/extension/PRIVACY.md)
+Read our full [Privacy Policy](https://uluak-alt.github.io/vibe-switch/privacy.html)
 
 ## 📜 License
 

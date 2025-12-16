@@ -97,4 +97,4 @@ A: Yes! Your license key works on any computer where you have Chrome installed.
 A: Free includes 3 vibes (Grammar Pro, Code Expert, TL;DR Summarizer). Pro unlocks 30+ vibes plus custom vibe creation.
 
 **Q: Do you collect my data?**
-A: No! Everything stays local on your device. We only validate your license key with Gumroad. Read our privacy policy: https://github.com/Uluak-alt/vibe-switch/blob/main/extension/PRIVACY.md
+A: No! Everything stays local on your device. We only validate your license key with Gumroad. Read our privacy policy: https://uluak-alt.github.io/vibe-switch/privacy.html
