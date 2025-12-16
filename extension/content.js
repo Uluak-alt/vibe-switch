@@ -691,12 +691,22 @@ function initializeExtension() {
       }
 
       console.log('🎭 Vibe clicked:', vibe.id, vibe.name);
-      state.activeId = vibe.id;
-      console.log('✅ State updated, activeId now:', state.activeId);
       
+      // Clear any existing prompt injection from textarea
+      clearInjectedPrompt();
+      
+      // Update active vibe
+      const previousVibe = state.activeId;
+      state.activeId = vibe.id;
+      console.log('✅ State updated:', previousVibe, '→', state.activeId);
+      
+      // Save to storage
       chrome.storage.sync.set({ activePersonality: vibe.id }, () => {
         console.log('💾 Saved to storage:', vibe.id);
       });
+      
+      // Show visual confirmation
+      showVibeChangeNotification(vibe.name);
       
       renderSidebar();
       setTimeout(() => {
@@ -918,6 +928,100 @@ function initializeExtension() {
 
   // Store the current prompt injection marker
   let lastInjectedPrompt = null;
+
+  // Helper: Clear any injected prompt from input fields
+  function clearInjectedPrompt() {
+    // Find all input fields on the page
+    const inputs = document.querySelectorAll('textarea, [contenteditable="true"]');
+    
+    inputs.forEach(input => {
+      let currentText = input.value !== undefined ? input.value : input.innerText;
+      
+      // Remove the injected prompt if it exists
+      if (lastInjectedPrompt && currentText.startsWith(lastInjectedPrompt)) {
+        const cleanText = currentText.substring(lastInjectedPrompt.length).trim();
+        if (input.value !== undefined) {
+          input.value = cleanText;
+        } else {
+          input.innerText = cleanText;
+        }
+        console.log('🧹 Cleared old injection');
+      }
+    });
+    
+    // Reset the injection tracker
+    lastInjectedPrompt = null;
+  }
+
+  // Helper: Show vibe change notification
+  function showVibeChangeNotification(vibeName) {
+    // Remove existing notification if any
+    const existing = document.getElementById('vibe-notification');
+    if (existing) existing.remove();
+
+    // Create notification
+    const notification = document.createElement('div');
+    notification.id = 'vibe-notification';
+    notification.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideIn 0.3s ease-out;
+    `;
+    
+    notification.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>Switched to: ${vibeName}</span>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Remove after 2 seconds
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease-in';
+      setTimeout(() => notification.remove(), 300);
+    }, 2000);
+  }
+
+  // Add animation styles
+  const animationStyles = document.createElement('style');
+  animationStyles.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes slideOut {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(animationStyles);
 
   // Listen for Enter key to inject system prompt
   document.addEventListener('keydown', (e) => {
