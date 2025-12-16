@@ -67,11 +67,14 @@ async function validateGumroadLicense(licenseKey) {
   console.log('Validating license key:', licenseKey.substring(0, 8) + '...');
 
   // Validate format first
-  const gumroadFormat = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{5}$/i;
+  const gumroadFormat = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{4,8}$/i;
   if (!gumroadFormat.test(licenseKey) && licenseKey.length < 20) {
-    console.log('❌ License key format invalid');
+    console.log('❌ License key format invalid. Key:', licenseKey);
+    console.log('❌ Format expected: XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXX (or 20+ chars)');
     return false;
   }
+  
+  console.log('✅ License key format valid');
 
   try {
     // Call Gumroad API directly to verify license
