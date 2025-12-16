@@ -11,8 +11,8 @@ Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT and
 - 🎯 **30+ Expert Vibes** - Grammar Pro, Code Expert, Copywriter, Screenwriter, and more
 - 🎨 **Custom Vibe Creator** - Design your own expert personalities
 - 🎚️ **5-Dimension Tuner** - Fine-tune depth, tone, creativity, format, and expertise level
-- 🆓 **Free Tier** - 3 essential vibes (Grammar Pro, Code Expert, TL;DR)
-- 💎 **Pro Mode** - Unlock all 30+ vibes + custom creation for $4.99
+- 🆓 **Free Tier** - 5 essential vibes (Grammar Pro, Code Expert, TL;DR, Resume Roaster, Travel Planner)
+- 💎 **Pro Mode** - Unlock all 25+ vibes + custom creation for $4.99
 
 ## 🚀 Installation
 
@@ -36,7 +36,7 @@ Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT and
 
 ## 🔓 Unlock Pro
 
-Get access to all 30+ vibes and custom vibe creation:
+Get access to all 25+ vibes and custom vibe creation:
 1. Click "Unlock Pro" in the sidebar
 2. Purchase a license ($4.99) via Gumroad
 3. Paste your license key in the extension popup

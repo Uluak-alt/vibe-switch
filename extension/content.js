@@ -133,7 +133,7 @@ function initializeExtension() {
   };
 
   // Free vibes (available without Pro)
-  const FREE_VIBES = ["Grammar Pro", "Code Expert", "TL;DR Summarizer"];
+  const FREE_VIBES = ["Grammar Pro", "Code Expert", "TL;DR Summarizer", "Resume Roaster", "Travel Planner"];
 
   // Categories for organization
   const CATEGORIES = {
