@@ -5,6 +5,34 @@
   // Prevent multiple injections
   if (document.getElementById('sidecar-root')) return;
 
+  // Check if extension is enabled before initializing
+  chrome.storage.local.get(['extensionEnabled'], (result) => {
+    const isEnabled = result.extensionEnabled !== false; // Default to true
+    if (!isEnabled) {
+      console.log('🎯 Vibe Switch is disabled');
+      return;
+    }
+    initializeExtension();
+  });
+
+  // Listen for toggle messages from popup
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === 'toggleExtension') {
+      const container = document.getElementById('sidecar-root');
+      if (container) {
+        if (request.enabled) {
+          container.style.display = 'block';
+          console.log('✅ Vibe Switch enabled');
+        } else {
+          container.style.display = 'none';
+          console.log('❌ Vibe Switch disabled');
+        }
+      }
+    }
+  });
+
+function initializeExtension() {
+
   // PROMPT DATABASE - 30+ Expert Vibes
   const PROMPTS = {
     // WRITING & EDITING (4)
@@ -982,4 +1010,6 @@
   loadState();
 
   console.log('🎯 Vibe Switch loaded successfully');
+}
+
 })();

@@ -13,6 +13,55 @@ document.addEventListener('DOMContentLoaded', async () => {
   const deactivateBtn = document.getElementById('deactivate-btn');
   const licenseInput = document.getElementById('license-input');
   const licenseKeyDisplay = document.getElementById('license-key-display');
+  
+  const extensionToggle = document.getElementById('extension-toggle');
+  const toggleStatusText = document.getElementById('toggle-status-text');
+
+  // Check and load extension enabled status
+  function checkExtensionStatus() {
+    chrome.storage.local.get(['extensionEnabled'], (result) => {
+      const isEnabled = result.extensionEnabled !== false; // Default to true
+      updateToggleUI(isEnabled);
+    });
+  }
+
+  function updateToggleUI(isEnabled) {
+    if (isEnabled) {
+      extensionToggle.classList.add('active');
+      toggleStatusText.textContent = 'Enabled';
+      toggleStatusText.style.color = '#3b82f6';
+    } else {
+      extensionToggle.classList.remove('active');
+      toggleStatusText.textContent = 'Disabled';
+      toggleStatusText.style.color = '#94a3b8';
+    }
+  }
+
+  // Toggle extension on/off
+  extensionToggle.addEventListener('click', () => {
+    chrome.storage.local.get(['extensionEnabled'], (result) => {
+      const currentState = result.extensionEnabled !== false;
+      const newState = !currentState;
+      
+      chrome.storage.local.set({ extensionEnabled: newState }, () => {
+        updateToggleUI(newState);
+        
+        // Notify all tabs to reload/hide the extension
+        chrome.tabs.query({}, (tabs) => {
+          tabs.forEach(tab => {
+            if (tab.url && (tab.url.includes('chatgpt.com') || tab.url.includes('gemini.google.com'))) {
+              chrome.tabs.sendMessage(tab.id, { 
+                action: 'toggleExtension', 
+                enabled: newState 
+              }).catch(() => {
+                // Tab might not have content script, ignore error
+              });
+            }
+          });
+        });
+      });
+    });
+  });
 
   // Check Pro status
   function checkProStatus() {
@@ -129,6 +178,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Initial check
+  // Initial checks
+  checkExtensionStatus();
   checkProStatus();
 });
