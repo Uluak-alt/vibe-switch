@@ -19,7 +19,6 @@
     {
       "matches": [
         "*://chatgpt.com/*",
-        "*://claude.ai/*",
         "*://gemini.google.com/*"
       ],
       "js": ["content.js"],
