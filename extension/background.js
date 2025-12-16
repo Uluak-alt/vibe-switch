@@ -45,6 +45,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+// Generate unique device ID
+async function getDeviceId() {
+  let deviceId = await chrome.storage.local.get('deviceId');
+  if (!deviceId.deviceId) {
+    // Create unique device ID from browser fingerprint
+    const id = 'device_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    await chrome.storage.local.set({ deviceId: id });
+    return id;
+  }
+  return deviceId.deviceId;
+}
+
 // Validate license with Gumroad API
 async function validateGumroadLicense(licenseKey) {
   if (!licenseKey || licenseKey.length < 8) {
@@ -54,22 +66,63 @@ async function validateGumroadLicense(licenseKey) {
 
   console.log('Validating license key:', licenseKey.substring(0, 8) + '...');
 
-  // For testing: Accept any key that matches Gumroad's format
-  // Format: XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXX (dashes with alphanumeric)
+  // Validate format first
   const gumroadFormat = /^[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{8}-[A-Z0-9]{5}$/i;
-  if (gumroadFormat.test(licenseKey)) {
-    console.log('✅ License key format valid - activating Pro');
-    return true;
+  if (!gumroadFormat.test(licenseKey) && licenseKey.length < 20) {
+    console.log('❌ License key format invalid');
+    return false;
   }
 
-  // Also accept any key 20+ chars for backward compatibility
-  if (licenseKey.length >= 20) {
-    console.log('✅ License key accepted (20+ chars) - activating Pro');
-    return true;
-  }
+  try {
+    // Call Gumroad API directly to verify license
+    const response = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        'product_permalink': 'vibeswitch',
+        'license_key': licenseKey,
+        'increment_uses_count': 'false' // Don't increment, just check
+      })
+    });
 
-  console.log('❌ License key format invalid');
-  return false;
+    const data = await response.json();
+    
+    if (data.success) {
+      console.log('✅ License key is valid with Gumroad');
+      
+      // Check device binding
+      const deviceId = await getDeviceId();
+      const result = await chrome.storage.sync.get('licensedDevices');
+      const licensedDevices = result.licensedDevices || {};
+      
+      if (!licensedDevices[licenseKey]) {
+        // First time using this license - bind to this device
+        licensedDevices[licenseKey] = deviceId;
+        await chrome.storage.sync.set({ licensedDevices });
+        console.log('✅ License bound to this device');
+        return true;
+      } else if (licensedDevices[licenseKey] === deviceId) {
+        // Same device that originally activated
+        console.log('✅ License already bound to this device');
+        return true;
+      } else {
+        // Different device trying to use the same license
+        console.log('❌ License already used on a different device');
+        return false;
+      }
+    } else {
+      console.log('❌ License invalid:', data.message);
+      return false;
+    }
+  } catch (error) {
+    console.error('License validation error:', error);
+    
+    // Fallback: Accept valid format if Gumroad API is down
+    console.log('⚠️ Gumroad API error - accepting valid format as fallback');
+    return gumroadFormat.test(licenseKey) || licenseKey.length >= 20;
+  }
 
   /* 
   // TODO: Enable real Gumroad validation when you have access token
