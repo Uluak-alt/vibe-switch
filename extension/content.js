@@ -1166,11 +1166,22 @@ function initializeExtension() {
       if (target.value !== undefined) {
         target.value = injection;
         target.dispatchEvent(new Event('input', { bubbles: true }));
-        console.log('✅ Injection complete (value)');
+        target.dispatchEvent(new Event('change', { bubbles: true }));
+        // Ensure ChatGPT detects the change
+        target.focus();
+        console.log('✅ Injection complete (value) with focus');
       } else {
         target.innerText = injection;
         target.dispatchEvent(new Event('input', { bubbles: true }));
-        console.log('✅ Injection complete (innerText)');
+        target.dispatchEvent(new Event('change', { bubbles: true }));
+        // Ensure the change is detected
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(target);
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        console.log('✅ Injection complete (innerText) with selection');
       }
     }
   }, true);
@@ -1180,23 +1191,31 @@ function initializeExtension() {
     // Check if it's a send button (ChatGPT and Gemini have different button structures)
     const isSendButton = e.target.closest('button[data-testid="send-button"]') || 
                         e.target.closest('button[aria-label*="Send"]') ||
-                        e.target.closest('button[class*="send"]');
+                        e.target.closest('button[class*="send"]') ||
+                        (e.target.tagName === 'BUTTON' && e.target.querySelector('svg'));
     
     if (!isSendButton) return;
     
     console.log('🖱️ Send button about to be clicked (mousedown)');
+    console.log('🔍 Button element:', isSendButton.outerHTML?.substring(0, 100));
     
     if (state.activeId === 'default') {
       console.log('⏭️ Skipping: default vibe active');
       return;
     }
 
-    // Find the input field
-    const textarea = document.querySelector('textarea, [contenteditable="true"]');
+    // Find the input field - ChatGPT uses specific IDs
+    const textarea = document.querySelector('#prompt-textarea') || 
+                    document.querySelector('textarea[placeholder*="Message"]') ||
+                    document.querySelector('textarea') || 
+                    document.querySelector('[contenteditable="true"]');
+    
     if (!textarea) {
       console.log('❌ No textarea found');
       return;
     }
+    
+    console.log('📝 Found textarea:', textarea.id || textarea.className || textarea.tagName);
 
     let systemInstruction = "";
     if (PROMPTS[state.activeId]) {
