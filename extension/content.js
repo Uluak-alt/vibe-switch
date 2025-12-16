@@ -5,30 +5,66 @@
   // Prevent multiple injections
   if (document.getElementById('sidecar-root')) return;
 
-  // Check if extension is enabled before initializing
-  chrome.storage.local.get(['extensionEnabled'], (result) => {
-    const isEnabled = result.extensionEnabled !== false; // Default to true
-    if (!isEnabled) {
-      console.log('🎯 Vibe Switch is disabled');
-      return;
+  // Check if chrome APIs are available (extension context is valid)
+  function isExtensionContextValid() {
+    try {
+      return chrome && chrome.runtime && chrome.runtime.id;
+    } catch (e) {
+      return false;
     }
-    initializeExtension();
+  }
+
+  // Safe wrapper for chrome API calls
+  function safeChromeCaller(callback) {
+    if (!isExtensionContextValid()) {
+      console.log('⚠️ Vibe Switch: Extension context invalidated, skipping operation');
+      return false;
+    }
+    try {
+      callback();
+      return true;
+    } catch (error) {
+      if (error.message && error.message.includes('Extension context invalidated')) {
+        console.log('⚠️ Vibe Switch: Extension was reloaded. Please refresh this page.');
+      } else {
+        console.error('Vibe Switch error:', error);
+      }
+      return false;
+    }
+  }
+
+  // Check if extension is enabled before initializing
+  safeChromeCaller(() => {
+    chrome.storage.local.get(['extensionEnabled'], (result) => {
+      if (!isExtensionContextValid()) return;
+      
+      const isEnabled = result.extensionEnabled !== false; // Default to true
+      if (!isEnabled) {
+        console.log('🎯 Vibe Switch is disabled');
+        return;
+      }
+      initializeExtension();
+    });
   });
 
   // Listen for toggle messages from popup
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'toggleExtension') {
-      const container = document.getElementById('sidecar-root');
-      if (container) {
-        if (request.enabled) {
-          container.style.display = 'block';
-          console.log('✅ Vibe Switch enabled');
-        } else {
-          container.style.display = 'none';
-          console.log('❌ Vibe Switch disabled');
+  safeChromeCaller(() => {
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      if (!isExtensionContextValid()) return;
+      
+      if (request.action === 'toggleExtension') {
+        const container = document.getElementById('sidecar-root');
+        if (container) {
+          if (request.enabled) {
+            container.style.display = 'block';
+            console.log('✅ Vibe Switch enabled');
+          } else {
+            container.style.display = 'none';
+            console.log('❌ Vibe Switch disabled');
+          }
         }
       }
-    }
+    });
   });
 
 function initializeExtension() {
@@ -154,11 +190,25 @@ function initializeExtension() {
 
   // Load state from chrome.storage
   function loadState() {
+    if (!isExtensionContextValid()) {
+      console.log('⚠️ Cannot load state: extension context invalid');
+      renderSidebar();
+      return;
+    }
+    
     chrome.storage.sync.get(['activePersonality', 'customVibes'], (syncData) => {
+      if (!isExtensionContextValid()) return;
+      
       if (syncData.activePersonality) state.activeId = syncData.activePersonality;
       if (syncData.customVibes) state.customVibes = syncData.customVibes;
       
+      if (!isExtensionContextValid()) {
+        renderSidebar();
+        return;
+      }
+      
       chrome.storage.local.get(['isPro', 'isCollapsed'], (localData) => {
+        if (!isExtensionContextValid()) return;
         if (localData.isPro) state.isPro = localData.isPro;
         if (localData.isCollapsed !== undefined) state.isCollapsed = localData.isCollapsed;
         renderSidebar();
@@ -583,7 +633,9 @@ function initializeExtension() {
     toggle.innerHTML = state.isCollapsed ? ICONS.CHEVRON_LEFT : ICONS.CHEVRON_RIGHT;
     toggle.onclick = () => {
       state.isCollapsed = !state.isCollapsed;
-      chrome.storage.local.set({ isCollapsed: state.isCollapsed });
+      if (isExtensionContextValid()) {
+        chrome.storage.local.set({ isCollapsed: state.isCollapsed });
+      }
       if (state.isCollapsed) state.view = 'list';
       renderSidebar();
     };
@@ -701,9 +753,13 @@ function initializeExtension() {
       console.log('✅ State updated:', previousVibe, '→', state.activeId);
       
       // Save to storage
-      chrome.storage.sync.set({ activePersonality: vibe.id }, () => {
-        console.log('💾 Saved to storage:', vibe.id);
-      });
+      if (isExtensionContextValid()) {
+        chrome.storage.sync.set({ activePersonality: vibe.id }, () => {
+          if (isExtensionContextValid()) {
+            console.log('💾 Saved to storage:', vibe.id);
+          }
+        });
+      }
       
       // Show visual confirmation
       showVibeChangeNotification(vibe.name);
@@ -713,7 +769,9 @@ function initializeExtension() {
         console.log('⏱️ Timeout fired, activeId still:', state.activeId);
         state.isCollapsed = true;
         state.view = 'list';
-        chrome.storage.local.set({ isCollapsed: true });
+        if (isExtensionContextValid()) {
+          chrome.storage.local.set({ isCollapsed: true });
+        }
         renderSidebar();
       }, 500);
     };
@@ -845,7 +903,9 @@ function initializeExtension() {
         state.customVibes.push(newVibe);
       }
 
-      chrome.storage.sync.set({ customVibes: state.customVibes });
+      if (isExtensionContextValid()) {
+        chrome.storage.sync.set({ customVibes: state.customVibes });
+      }
       state.view = 'list';
       renderSidebar();
     };
@@ -853,7 +913,9 @@ function initializeExtension() {
     if (isEdit) {
       form.querySelector('#del-btn').onclick = () => {
         state.customVibes = state.customVibes.filter(v => v.id !== state.editingId);
-        chrome.storage.sync.set({ customVibes: state.customVibes });
+        if (isExtensionContextValid()) {
+          chrome.storage.sync.set({ customVibes: state.customVibes });
+        }
         state.view = 'list';
         renderSidebar();
       };
@@ -866,7 +928,9 @@ function initializeExtension() {
     // Auto-expand sidebar if collapsed
     if (state.isCollapsed) {
       state.isCollapsed = false;
-      chrome.storage.local.set({ isCollapsed: false });
+      if (isExtensionContextValid()) {
+        chrome.storage.local.set({ isCollapsed: false });
+      }
       renderSidebar();
     }
 
