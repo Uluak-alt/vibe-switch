@@ -1175,8 +1175,8 @@ function initializeExtension() {
     }
   }, true);
 
-  // Listen for send button clicks (for pasted/copied text)
-  document.addEventListener('click', (e) => {
+  // Listen for send button clicks (for pasted/copied text) - CAPTURE phase to inject BEFORE send
+  document.addEventListener('mousedown', (e) => {
     // Check if it's a send button (ChatGPT and Gemini have different button structures)
     const isSendButton = e.target.closest('button[data-testid="send-button"]') || 
                         e.target.closest('button[aria-label*="Send"]') ||
@@ -1184,7 +1184,7 @@ function initializeExtension() {
     
     if (!isSendButton) return;
     
-    console.log('🖱️ Send button clicked');
+    console.log('🖱️ Send button about to be clicked (mousedown)');
     
     if (state.activeId === 'default') {
       console.log('⏭️ Skipping: default vibe active');
@@ -1232,18 +1232,22 @@ function initializeExtension() {
     // Inject the prompt
     const injection = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n${userMessage}`;
     
-    console.log('💉 Injecting prompt on send button click');
+    console.log('💉 Injecting prompt BEFORE send (mousedown)');
+    console.log('📝 User message length:', userMessage.length);
+    console.log('📝 Injection length:', injection.length);
     
     if (textarea.value !== undefined) {
       textarea.value = injection;
       textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      textarea.dispatchEvent(new Event('change', { bubbles: true }));
     } else {
       textarea.innerText = injection;
       textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      textarea.dispatchEvent(new Event('change', { bubbles: true }));
     }
     
     lastInjectedPrompt = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n`;
-    console.log('✅ Injection complete for send button');
+    console.log('✅ Injection complete, button will now process click');
   }, true);
 
   // Clear injection when input is cleared/changed
