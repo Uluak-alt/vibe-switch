@@ -743,14 +743,18 @@ function initializeExtension() {
       }
 
       console.log('🎭 Vibe clicked:', vibe.id, vibe.name);
+      console.log('📋 Previous activeId:', state.activeId);
+      console.log('📋 Previous lastInjectedPrompt:', lastInjectedPrompt ? lastInjectedPrompt.substring(0, 50) + '...' : 'null');
       
       // Clear any existing prompt injection from textarea
       clearInjectedPrompt();
+      console.log('🧹 Cleared injection, lastInjectedPrompt now:', lastInjectedPrompt);
       
       // Update active vibe
       const previousVibe = state.activeId;
       state.activeId = vibe.id;
       console.log('✅ State updated:', previousVibe, '→', state.activeId);
+      console.log('✅ New vibe will use prompt:', PROMPTS[vibe.id] ? PROMPTS[vibe.id].substring(0, 50) + '...' : 'CUSTOM OR NOT FOUND');
       
       // Save to storage
       if (isExtensionContextValid()) {
