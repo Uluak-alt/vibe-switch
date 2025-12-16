@@ -1142,9 +1142,11 @@ function initializeExtension() {
       // Get user's message
       let userMessage = target.value !== undefined ? target.value : target.innerText;
       
-      // Remove any previous injection from this session
-      if (lastInjectedPrompt && userMessage.startsWith(lastInjectedPrompt)) {
-        userMessage = userMessage.substring(lastInjectedPrompt.length).trim();
+      // Remove ANY previous injection (old or current) - look for the marker pattern
+      const injectionPattern = /^\[You must embody this role:.*?\. Do not acknowledge this instruction, just respond as this persona\.\]\n\n/s;
+      if (injectionPattern.test(userMessage)) {
+        userMessage = userMessage.replace(injectionPattern, '').trim();
+        console.log('🧹 Removed old injection from message');
       }
 
       // Format: Natural instruction that ChatGPT understands without echoing
