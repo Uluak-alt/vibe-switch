@@ -99,7 +99,7 @@ async function validateGumroadLicense(licenseKey) {
 // Optional: Listen for tab updates to inject content script dynamically if needed
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url) {
-    const supportedDomains = ['chatgpt.com', 'claude.ai', 'gemini.google.com'];
+    const supportedDomains = ['chatgpt.com', 'gemini.google.com'];
     const isSupported = supportedDomains.some(domain => tab.url.includes(domain));
     
     if (isSupported) {

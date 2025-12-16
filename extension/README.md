@@ -1,12 +1,12 @@
-# Vibe Switch - Chrome Extension
+# 🎭 Vibe Switch - Chrome Extension
 
-Transform your AI chat prompts with personality! Pro tools for ChatGPT, Claude & Gemini.
+Transform your AI chat prompts with personality! Pro tools for ChatGPT & Gemini.
 
 ## 🚀 Features
 
 ### Free Features
 - ✅ 3 expert vibe presets (Grammar Pro, Code Expert, TL;DR Summarizer)
-- ✅ Works on ChatGPT, Claude, and Gemini
+- ✅ Works on ChatGPT and Gemini
 - ✅ Easy-to-use sidebar interface
 - ✅ Collapsible design
 
@@ -21,7 +21,7 @@ Transform your AI chat prompts with personality! Pro tools for ChatGPT, Claude &
 ### For Users
 1. Download from Chrome Web Store (coming soon)
 2. Click "Add to Chrome"
-3. Visit ChatGPT, Claude, or Gemini
+3. Visit ChatGPT or Gemini
 4. Click the Vibe Switch icon to get started
 
 ### For Developers
@@ -30,7 +30,7 @@ Transform your AI chat prompts with personality! Pro tools for ChatGPT, Claude &
 3. Enable "Developer mode"
 4. Click "Load unpacked"
 5. Select the `extension` folder
-6. Visit ChatGPT, Claude, or Gemini to test
+6. Visit ChatGPT or Gemini to test
 
 ## 🔐 Privacy
 
@@ -73,7 +73,6 @@ To unlock Pro features, users purchase a license key from Gumroad for $4.99.
 
 ### Supported Sites
 - ✅ chatgpt.com
-- ✅ claude.ai
 - ✅ gemini.google.com
 
 ### How It Works
@@ -129,7 +128,7 @@ The extension is already built and ready to submit. Just:
 ## 🐛 Troubleshooting
 
 ### Extension not appearing
-- Make sure you're on a supported site (ChatGPT, Claude, or Gemini)
+- Make sure you're on a supported site (ChatGPT or Gemini)
 - Try refreshing the page
 - Check if extension is enabled in `chrome://extensions/`
 

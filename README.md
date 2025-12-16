@@ -2,7 +2,7 @@
 
 **Transform your AI prompts with expert personalities**
 
-Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT, Claude, and Gemini. Get professional writing, creative storytelling, technical expertise, and more - all with a single click.
+Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT and Gemini. Get professional writing, creative storytelling, technical expertise, and more - all with a single click.
 
 🌐 **Website:** https://uluak-alt.github.io/vibe-switch/
 
@@ -29,7 +29,7 @@ Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT, Cl
 
 ## 📖 How It Works
 
-1. Visit ChatGPT, Claude, or Gemini
+1. Visit ChatGPT or Gemini
 2. Click a vibe from the sidebar (collapses/expands with toggle)
 3. Your prompt gets transformed with expert personality
 4. Hit Enter to send the enhanced prompt

@@ -61,7 +61,6 @@ We do NOT:
 
 The extension operates on these websites:
 - chatgpt.com
-- claude.ai
 - gemini.google.com
 
 **We only**:
@@ -79,7 +78,7 @@ The extension operates on these websites:
 
 2. **activeTab**
    - Purpose: Inject sidebar on supported chat websites
-   - Scope: Only when you visit ChatGPT, Claude, or Gemini
+   - Scope: Only when you visit ChatGPT or Gemini
 
 3. **scripting**
    - Purpose: Add the Vibe Switch interface to web pages
@@ -89,7 +88,6 @@ The extension operates on these websites:
 
 We request access to:
 - `*://chatgpt.com/*`
-- `*://claude.ai/*`
 - `*://gemini.google.com/*`
 
 **Purpose**: Inject the Vibe Switch sidebar and modify your prompts with personality instructions.
