@@ -144,7 +144,7 @@ The extension is already built and ready to submit. Just:
 
 ## 🤝 Support
 
-- Email: support@vibeswitch.app
+- GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
 - Issues: [GitHub Issues](https://github.com/yourusername/vibe-switch/issues)
 - Updates: Follow on Twitter [@vibeswitch](https://twitter.com/vibeswitch)
 

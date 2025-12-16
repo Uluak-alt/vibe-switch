@@ -93,7 +93,7 @@ Issues and pull requests welcome! Please read our submission guidelines first.
 ## 📧 Support
 
 - GitHub Issues: [Report a bug](https://github.com/Uluak-alt/vibe-switch/issues)
-- Email: support@vibeswitch.app
+- GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
 
 ---
 

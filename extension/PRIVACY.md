@@ -130,7 +130,7 @@ Vibe Switch is not directed at children under 13. We do not knowingly collect in
 
 We may update this policy occasionally. Changes will be posted:
 - In this document with a new "Last Updated" date
-- On our website: https://vibeswitch.app/privacy
+- On the GitHub Pages website: https://uluak-alt.github.io/vibe-switch/privacy.html
 - In the Chrome Web Store listing
 
 ## Your Data Rights
@@ -145,9 +145,8 @@ Given the local-only storage model, your data control is primarily exercised by 
 
 Questions about privacy?
 
-- Email: privacy@vibeswitch.app
-- Website: https://vibeswitch.app/privacy
-- GitHub: https://github.com/yourusername/vibe-switch/issues
+- GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
+- Website: https://uluak-alt.github.io/vibe-switch/
 
 ## Regulatory Compliance
 

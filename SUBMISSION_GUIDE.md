@@ -20,7 +20,7 @@
 #### manifest.json
 ```json
 {
-  "homepage_url": "https://vibeswitch.app", // UPDATE THIS
+  "homepage_url": "https://uluak-alt.github.io/vibe-switch/",
   "author": "Vibe Switch Team"             // UPDATE THIS
 }
 ```
@@ -202,8 +202,8 @@ A vibe is a pre-configured system prompt that transforms how the AI responds. In
 
 ## 📞 Support
 
-• Email: support@vibeswitch.app
-• Help Center: vibeswitch.app/help
+• GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
+• Documentation: https://uluak-alt.github.io/vibe-switch/
 • Updates: Follow @vibeswitch
 
 ---
@@ -247,7 +247,7 @@ Create screenshots showing:
 
 **Privacy Policy URL**:
 ```
-https://vibeswitch.app/privacy
+https://uluak-alt.github.io/vibe-switch/privacy.html
 ```
 (Or host `PRIVACY.md` on GitHub Pages)
 
@@ -309,7 +309,7 @@ Before submission, create:
 - [ ] 440x280 PNG with icon and branding
 
 ### 3. Website Landing Page (Highly Recommended)
-Create simple page at https://vibeswitch.app with:
+Already created GitHub Pages at https://uluak-alt.github.io/vibe-switch/ with:
 - Hero section explaining what it is
 - Feature list with screenshots
 - Pricing ($4.99 Pro)

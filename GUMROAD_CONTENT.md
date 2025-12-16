@@ -57,7 +57,7 @@ Your unique license key is displayed above. Copy it - you'll need it to activate
 📧 NEED HELP?
 
 - Website: https://uluak-alt.github.io/vibe-switch/
-- Support: support@vibeswitch.app
+- Support: https://github.com/Uluak-alt/vibe-switch/issues
 - GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
 
 ⭐ Enjoying Vibe Switch? Leave a review and help others discover it!
