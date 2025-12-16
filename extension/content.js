@@ -54,11 +54,18 @@
       
       if (request.action === 'toggleExtension') {
         const container = document.getElementById('sidecar-root');
-        if (container) {
-          if (request.enabled) {
+        if (request.enabled) {
+          // If enabling and container doesn't exist, initialize
+          if (!container) {
+            console.log('✅ Vibe Switch enabled - initializing');
+            initializeExtension();
+          } else {
             container.style.display = 'block';
             console.log('✅ Vibe Switch enabled');
-          } else {
+          }
+        } else {
+          // If disabling, hide the container
+          if (container) {
             container.style.display = 'none';
             console.log('❌ Vibe Switch disabled');
           }
