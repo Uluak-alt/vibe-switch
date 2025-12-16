@@ -974,10 +974,22 @@ function initializeExtension() {
       btn.textContent = 'Verifying...';
 
       // Send to background script for validation
+      if (!isExtensionContextValid()) {
+        alert('Extension context invalidated. Please reload the page.');
+        btn.disabled = false;
+        btn.textContent = 'Activate License';
+        return;
+      }
+      
       chrome.runtime.sendMessage({ 
         action: 'validateLicense', 
         licenseKey: licenseKey 
       }, (response) => {
+        if (!isExtensionContextValid()) {
+          alert('Extension context invalidated. Please reload the page.');
+          return;
+        }
+        
         if (response && response.success) {
           state.isPro = true;
           overlay.remove();
