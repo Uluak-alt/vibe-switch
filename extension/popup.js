@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Buy button - opens Gumroad
   buyBtn.addEventListener('click', () => {
     // Replace with your actual Gumroad product URL
-    chrome.tabs.create({ url: 'https://fethiulak.gumroad.com/l/vibeswitch' });
+    chrome.tabs.create({ url: 'https://vibeswitch.gumroad.com/l/vibeswitch' });
   });
 
   // Activate license
