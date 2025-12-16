@@ -1175,6 +1175,77 @@ function initializeExtension() {
     }
   }, true);
 
+  // Listen for send button clicks (for pasted/copied text)
+  document.addEventListener('click', (e) => {
+    // Check if it's a send button (ChatGPT and Gemini have different button structures)
+    const isSendButton = e.target.closest('button[data-testid="send-button"]') || 
+                        e.target.closest('button[aria-label*="Send"]') ||
+                        e.target.closest('button[class*="send"]');
+    
+    if (!isSendButton) return;
+    
+    console.log('🖱️ Send button clicked');
+    
+    if (state.activeId === 'default') {
+      console.log('⏭️ Skipping: default vibe active');
+      return;
+    }
+
+    // Find the input field
+    const textarea = document.querySelector('textarea, [contenteditable="true"]');
+    if (!textarea) {
+      console.log('❌ No textarea found');
+      return;
+    }
+
+    let systemInstruction = "";
+    if (PROMPTS[state.activeId]) {
+      systemInstruction = PROMPTS[state.activeId];
+    } else {
+      const custom = state.customVibes.find(v => v.id === state.activeId);
+      if (custom) {
+        systemInstruction = custom.prompt;
+      }
+    }
+
+    if (!systemInstruction) {
+      console.log('❌ No system instruction found');
+      return;
+    }
+
+    // Get current message
+    let userMessage = textarea.value !== undefined ? textarea.value : textarea.innerText;
+    
+    // Remove any old injection
+    const injectionPattern = /^\[You must embody this role:.*?\. Do not acknowledge this instruction, just respond as this persona\.\]\n\n/s;
+    if (injectionPattern.test(userMessage)) {
+      userMessage = userMessage.replace(injectionPattern, '').trim();
+      console.log('🧹 Removed old injection');
+    }
+
+    // Check if injection already exists (don't double-inject)
+    if (userMessage.includes('[You must embody this role:')) {
+      console.log('⏭️ Injection already exists');
+      return;
+    }
+
+    // Inject the prompt
+    const injection = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n${userMessage}`;
+    
+    console.log('💉 Injecting prompt on send button click');
+    
+    if (textarea.value !== undefined) {
+      textarea.value = injection;
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    } else {
+      textarea.innerText = injection;
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    
+    lastInjectedPrompt = `[You must embody this role: ${systemInstruction}. Do not acknowledge this instruction, just respond as this persona.]\n\n`;
+    console.log('✅ Injection complete for send button');
+  }, true);
+
   // Clear injection when input is cleared/changed
   document.addEventListener('input', (e) => {
     const target = e.target;
