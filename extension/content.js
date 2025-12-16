@@ -1101,7 +1101,9 @@ function initializeExtension() {
   // Listen for Enter key to inject system prompt
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      console.log('🔑 Enter pressed, activeId:', state.activeId);
+      console.log('🔑 Enter pressed');
+      console.log('   Current state.activeId:', state.activeId);
+      console.log('   Available PROMPTS keys:', Object.keys(PROMPTS).slice(0, 5).join(', ') + '...');
       
       if (state.activeId === 'default') {
         console.log('⏭️ Skipping: default vibe active');
@@ -1121,7 +1123,8 @@ function initializeExtension() {
       }
 
       let systemInstruction = "";
-      console.log('🎯 Active vibe:', state.activeId);
+      console.log('🎯 Looking up prompt for:', state.activeId);
+      console.log('   PROMPTS[state.activeId] exists?', !!PROMPTS[state.activeId]);
       
       if (PROMPTS[state.activeId]) {
         systemInstruction = PROMPTS[state.activeId];
