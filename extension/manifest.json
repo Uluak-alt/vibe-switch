@@ -5,8 +5,7 @@
   "description": "Transform your prompts with personality. 5 free expert vibes, 25+ with Pro. For ChatGPT & Gemini.",
   "permissions": [
     "storage",
-    "activeTab",
-    "scripting"
+    "activeTab"
   ],
   "host_permissions": [
     "*://chatgpt.com/*",
