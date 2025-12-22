@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "description": "Transform your prompts with personality. Pro tools for ChatGPT & Gemini with 30+ expert vibes.",
   "permissions": [
-    "storage",
-    "activeTab",
-    "scripting"
+    "storage"
   ],
   "host_permissions": [
     "*://chatgpt.com/*",
