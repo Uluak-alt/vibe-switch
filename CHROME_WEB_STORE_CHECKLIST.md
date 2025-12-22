@@ -15,7 +15,7 @@
 - [x] License validation with Gumroad API
 - [x] Device binding (1 license = 1 device)
 - [x] Enable/disable toggle
-- [x] Free tier (3 vibes) works without license
+- [x] Free tier (5 vibes) works without license
 - [x] Pro unlock works with valid license key
 - [x] Custom vibe creation (Pro only)
 - [x] Vibe change notifications
@@ -50,8 +50,8 @@
 - [x] Gumroad product setup required (if not already done)
 - [x] Product ID in code: `6wYZgAYhn-FRF3vctgVN-A==`
 - [x] License validation endpoint working
-- [x] Free tier clearly defined (3 vibes)
-- [x] Pro tier clearly defined (30+ vibes + custom)
+- [x] Free tier clearly defined (5 vibes)
+- [x] Pro tier clearly defined (25+ vibes + custom)
 
 ---
 
@@ -74,14 +74,14 @@ Vibe Switch
 
 ### Summary (132 characters max)
 ```
-Pro personas for ChatGPT & Gemini. Transform AI responses with 30+ expert vibes. Free & Pro tiers available.
+Pro personas for ChatGPT & Gemini. 5 free expert vibes, 25+ with Pro. One-click personality switching.
 ```
 
 ### Description (use this for Chrome Web Store)
 ```
 🎯 Transform Your AI Conversations with Expert Personalities
 
-Vibe Switch adds 30+ expert personalities to ChatGPT and Gemini. Get answers from a Senior Copy Editor, Staff Engineer, Socratic Tutor, Resume Roaster, and 27+ other expert vibes instead of generic AI responses.
+Vibe Switch adds 30+ expert personalities to ChatGPT and Gemini. Get answers from a Senior Copy Editor, Staff Engineer, Socratic Tutor, Resume Roaster, Travel Planner, and 25+ other expert vibes instead of generic AI responses.
 
 ✨ KEY FEATURES
 • 30+ Expert Vibes across Writing, Learning, Career, Technical, Creative, and Lifestyle categories
@@ -91,8 +91,8 @@ Vibe Switch adds 30+ expert personalities to ChatGPT and Gemini. Get answers fro
 • Works Seamlessly - ChatGPT and Gemini support
 
 💰 PRICING
-Free: 3 expert vibes (Grammar Pro, Code Expert, TL;DR Summarizer)
-Pro: $4.99 one-time - 30+ vibes + unlimited custom vibes + all future updates
+Free: 5 expert vibes (Grammar Pro, Code Expert, TL;DR Summarizer, Resume Roaster, Travel Planner)
+Pro: $4.99 one-time - 25+ vibes + unlimited custom vibes + all future updates
 
 🔐 PRIVACY & SECURITY
 • No data collection or tracking

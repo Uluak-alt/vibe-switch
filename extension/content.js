@@ -64,10 +64,20 @@
             console.log('✅ Vibe Switch enabled');
           }
         } else {
-          // If disabling, hide the container
+          // If disabling, hide the container and clear any injected prompts
           if (container) {
             container.style.display = 'none';
             console.log('❌ Vibe Switch disabled');
+          }
+          
+          // Clear any injected prompts from textareas
+          clearInjectedPrompt();
+          console.log('🧹 Cleared all injected prompts');
+          
+          // Reset active vibe to default
+          state.activeId = 'default';
+          if (isExtensionContextValid()) {
+            chrome.storage.sync.set({ activePersonality: 'default' });
           }
         }
       }
@@ -123,7 +133,7 @@ function initializeExtension() {
   };
 
   // Free vibes (available without Pro)
-  const FREE_VIBES = ["Grammar Pro", "Code Expert", "TL;DR Summarizer"];
+  const FREE_VIBES = ["Grammar Pro", "Code Expert", "TL;DR Summarizer", "Resume Roaster", "Travel Planner"];
 
   // Categories for organization
   const CATEGORIES = {
@@ -1113,6 +1123,13 @@ function initializeExtension() {
   // Listen for Enter key to inject system prompt
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
+      // Check if extension is enabled
+      const container = document.getElementById('sidecar-root');
+      if (!container || container.style.display === 'none') {
+        console.log('⏭️ Skipping: extension is disabled');
+        return;
+      }
+      
       console.log('🔑 Enter pressed');
       console.log('   Current state.activeId:', state.activeId);
       console.log('   Available PROMPTS keys:', Object.keys(PROMPTS).slice(0, 5).join(', ') + '...');
@@ -1200,6 +1217,13 @@ function initializeExtension() {
 
   // Listen for send button clicks (for pasted/copied text) - CAPTURE phase to inject BEFORE send
   document.addEventListener('mousedown', (e) => {
+    // Check if extension is enabled
+    const container = document.getElementById('sidecar-root');
+    if (!container || container.style.display === 'none') {
+      console.log('⏭️ Skipping: extension is disabled');
+      return;
+    }
+    
     // Check if it's a send button (ChatGPT and Gemini have different button structures)
     const isSendButton = e.target.closest('button[data-testid="send-button"]') || 
                         e.target.closest('button[aria-label*="Send"]') ||
