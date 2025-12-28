@@ -1,100 +1,54 @@
-# 🎭 Vibe Switch - Chrome Extension
+# 🎭 Vibe Switch
 
 **Transform your AI prompts with expert personalities**
 
-Vibe Switch is a Chrome extension that injects 30+ expert vibes into ChatGPT and Gemini. Get professional writing, creative storytelling, technical expertise, and more - all with a single click.
+This repository hosts the official website and documentation for Vibe Switch - a Chrome extension that adds 30+ expert vibes to ChatGPT and Gemini.
 
-🌐 **Website:** https://uluak-alt.github.io/vibe-switch/
+🌐 **Website:** https://uluak-alt.github.io/vibe-switch/  
+🏪 **Chrome Web Store:** https://chromewebstore.google.com/detail/vibe-switch/afgedjgghbajmcclddhekfigcjjmcdfn  
+💎 **Get Pro:** https://vibeswitch.gumroad.com/l/vibeswitch
 
-## ✨ Features
+## ✨ What is Vibe Switch?
+
+Vibe Switch transforms your AI conversations with expert personality modes. Get professional writing, creative storytelling, technical expertise, and more - all with a single click.
+
+### Features
 
 - 🎯 **30+ Expert Vibes** - Grammar Pro, Code Expert, Copywriter, Screenwriter, and more
-- 🎨 **Custom Vibe Creator** - Design your own expert personalities
-- 🎚️ **5-Dimension Tuner** - Fine-tune depth, tone, creativity, format, and expertise level
-- 🆓 **Free Tier** - 5 essential vibes (Grammar Pro, Code Expert, TL;DR, Resume Roaster, Travel Planner)
+- 🎨 **Custom Vibe Creator** - Design your own expert personalities (Pro)
+- 🎚️ **5-Dimension Tuner** - Fine-tune depth, tone, creativity, format, and expertise
+- 🆓 **Free Tier** - 5 essential vibes included
 - 💎 **Pro Mode** - Unlock all 25+ vibes + custom creation for $4.99
 
-## 🚀 Installation
+## 🚀 Get Started
 
-### From Chrome Web Store
-*Coming soon - currently in review*
+1. **Install the extension** from the [Chrome Web Store](https://chromewebstore.google.com/detail/vibe-switch/afgedjgghbajmcclddhekfigcjjmcdfn)
+2. Visit ChatGPT or Gemini
+3. Click a vibe from the sidebar
+4. Your prompt gets transformed with expert personality
 
-### Manual Installation (Developer Mode)
-1. Download or clone this repository
-2. Open Chrome and go to `chrome://extensions/`
-3. Enable "Developer mode" (top right)
-4. Click "Load unpacked"
-5. Select the `extension/` folder
-6. Pin the extension to your toolbar
+## 💎 Upgrade to Pro
 
-## 📖 How It Works
+Unlock all vibes and custom vibe creation:
+- Visit: https://vibeswitch.gumroad.com/l/vibeswitch
+- One-time payment of $4.99
+- Lifetime access to all features
 
-1. Visit ChatGPT or Gemini
-2. Click a vibe from the sidebar (collapses/expands with toggle)
-3. Your prompt gets transformed with expert personality
-4. Hit Enter to send the enhanced prompt
+## 📄 Documentation
 
-## 🔓 Unlock Pro
+- [Privacy Policy](https://uluak-alt.github.io/vibe-switch/privacy.html)
+- [Website](https://uluak-alt.github.io/vibe-switch/)
 
-Get access to all 25+ vibes and custom vibe creation:
-1. Click "Unlock Pro" in the sidebar
-2. Purchase a license ($4.99) via Gumroad
-3. Paste your license key in the extension popup
-4. Enjoy unlimited expert personalities!
+## � Support
 
-## 🛠️ Development
+Have questions or issues? Open an issue on this repository.
 
-This repository contains both the extension and a demo app:
+## 📝 License
 
-### Extension (Production)
-```bash
-cd extension/
-# Load in Chrome via chrome://extensions/
-```
-
-### Demo App (Development)
-```bash
-npm install
-npm run dev
-```
-
-## 📁 Project Structure
-
-```
-extension/          # Chrome Extension (production code)
-├── manifest.json   # Extension configuration
-├── background.js   # Service worker for license validation
-├── content.js      # Main extension logic (30+ vibes)
-├── popup.html/js   # License management UI
-├── icons/          # Extension icons
-└── PRIVACY.md      # Privacy policy
-
-docs/               # GitHub Pages landing page
-App.tsx             # Demo app (not part of extension)
-```
-
-## 🔒 Privacy & Security
-
-- **Zero tracking** - No analytics or user data collection
-- **Local storage only** - All preferences stored on your device
-- **No API keys** - Pure prompt injection, no external calls
-- **Open source** - Full transparency
-
-Read our full [Privacy Policy](https://uluak-alt.github.io/vibe-switch/privacy.html)
-
-## 📜 License
-
-MIT License - see [LICENSE](LICENSE) file
-
-## 🤝 Contributing
-
-Issues and pull requests welcome! Please read our submission guidelines first.
-
-## 📧 Support
-
-- GitHub Issues: [Report a bug](https://github.com/Uluak-alt/vibe-switch/issues)
-- GitHub Issues: https://github.com/Uluak-alt/vibe-switch/issues
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
+
+Made with ❤️ for AI power users
 
 **Made with ❤️ for AI power users**
